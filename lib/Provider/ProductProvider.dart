@@ -4,7 +4,7 @@ import '../Model/Product.dart';
 import 'package:http/http.dart' as http;
 
 class ProductProvider extends ChangeNotifier {
-  String url = 'https://jsonplaceholder.typicode.com/photos';
+    String url = 'https://jsonplaceholder.typicode.com/photos';
   List<Product> _items = [];
 
   List<Product> get items => _items;
