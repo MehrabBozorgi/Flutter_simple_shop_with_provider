@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_provider_toplearn/Widgets/LoginInputFieldWidget.dart';
+import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
+import 'package:flutter_app_provider_toplearn/Widgets/InputFieldWidget.dart';
 import 'package:flutter_app_provider_toplearn/Widgets/PurpleButtonWidget.dart';
 import 'package:flutter_app_provider_toplearn/Widgets/QuestionTextWidget.dart';
+import 'package:provider/provider.dart';
 
-import 'HomePage.dart';
 import 'SignUpPage.dart';
 
 class LoginPage extends StatelessWidget {
+
+  String _username;
+  String _password;
   @override
   Widget build(BuildContext context) {
+    final authRequest = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -18,17 +24,21 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 100, right: 20, left: 20),
               child: Image.asset('wellcom.png'),
             ),
-            LoginInputFieldWidget(
+            InputFieldWidget(
               hintText: 'UserName',
               icon: Icons.person,
-              onChange: (value) {},
+              onChange: (value) {
+                _username=value;
+              },
               type: TextInputType.text,
               secure: false,
             ),
-            LoginInputFieldWidget(
+            InputFieldWidget(
               hintText: 'Password',
               icon: Icons.lock,
-              onChange: (value) {},
+              onChange: (value) {
+                _password=value;
+              },
               type: TextInputType.visiblePassword,
               secure: true,
             ),
@@ -36,12 +46,15 @@ class LoginPage extends StatelessWidget {
               text: 'Login',
               colour: Colors.purple[700],
               onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(),
-                  ),
-                );
+
+                authRequest.LoginRequest(_username, _password);
+
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => HomePage(),
+                //   ),
+                // );
               },
             ),
             QuestionText(

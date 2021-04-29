@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
-class LoginInputFieldWidget extends StatelessWidget {
+class InputFieldWidget extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged onChange;
+
   final TextInputType type;
   final bool secure;
 
-  const LoginInputFieldWidget({
+
+  const InputFieldWidget({
     @required this.hintText,
     @required this.icon,
     @required this.onChange,
+
     @required this.type,
     @required this.secure,
   });
@@ -24,9 +27,11 @@ class LoginInputFieldWidget extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 35),
-      child: TextField(
+      child: TextFormField(
+
         obscureText: secure,
         onChanged: onChange,
+
         cursorColor: Colors.purple,
         keyboardType: type,
         decoration: InputDecoration(

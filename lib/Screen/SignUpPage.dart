@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
+import 'package:flutter_app_provider_toplearn/Widgets/SocialPicWidget.dart';
+import 'package:provider/provider.dart';
 import '../Screen/HomePage.dart';
-import '../Widgets/LoginInputFieldWidget.dart';
+import '../Widgets/InputFieldWidget.dart';
 import '../Widgets/PurpleButtonWidget.dart';
 
 class SignUpPage extends StatelessWidget {
+
+  String _email;
+  String _password;
+  String _username;
+
   @override
   Widget build(BuildContext context) {
+    final authRequest = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -15,24 +25,30 @@ class SignUpPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 100, right: 20, left: 20),
               child: Image.asset('signup.png'),
             ),
-            LoginInputFieldWidget(
+            InputFieldWidget(
               hintText: 'UserName',
               icon: Icons.person,
-              onChange: (value) {},
+              onChange: (value) {
+                _username = value;
+              },
               type: TextInputType.text,
               secure: false,
             ),
-            LoginInputFieldWidget(
+            InputFieldWidget(
               hintText: 'Email',
               icon: Icons.email,
-              onChange: (value) {},
+              onChange: (value) {
+                _email = value;
+              },
               type: TextInputType.emailAddress,
-              secure: true,
+              secure: false,
             ),
-            LoginInputFieldWidget(
+            InputFieldWidget(
               hintText: 'Password',
               icon: Icons.lock,
-              onChange: (value) {},
+              onChange: (value) {
+                _password = value;
+              },
               type: TextInputType.visiblePassword,
               secure: true,
             ),
@@ -40,12 +56,12 @@ class SignUpPage extends StatelessWidget {
               text: 'SignUp',
               colour: Colors.purple[700],
               onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(),
-                  ),
-                );
+
+                authRequest.signUpRequest(_username, _email.trim(), _password);
+                //await authRequest.LoginRequest(_username, _password);
+                //TODO
+                //این برنامه ای پی ایش مشکب داره اگر کار از شزیت
+                //پریفرنس استفاده میکنیم تا کاربر داخل برنامه بمونه
               },
             ),
             Row(
@@ -62,7 +78,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ],
             ),
-
           ],
         ),
       ),
@@ -70,27 +85,3 @@ class SignUpPage extends StatelessWidget {
   }
 }
 
-class SocialPicWidget extends StatelessWidget {
-  final String img;
-
-  const SocialPicWidget({@required this.img});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 2,
-          color: Colors.purple[100],
-        ),
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Image.asset(
-        img,
-        height: 30,
-        width: 30,
-      ),
-    );
-  }
-}
