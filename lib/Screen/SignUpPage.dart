@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
-import 'package:flutter_app_provider_toplearn/Widgets/SocialPicWidget.dart';
+import '../Provider/AuthProvider.dart';
+import '../Widgets/SocialPicWidget.dart';
 import 'package:provider/provider.dart';
-import '../Screen/HomePage.dart';
 import '../Widgets/InputFieldWidget.dart';
 import '../Widgets/PurpleButtonWidget.dart';
 
 class SignUpPage extends StatelessWidget {
-
   String _email;
   String _password;
   String _username;
@@ -26,7 +24,7 @@ class SignUpPage extends StatelessWidget {
               child: Image.asset('signup.png'),
             ),
             InputFieldWidget(
-              hintText: 'UserName',
+              hintText: 'User name',
               icon: Icons.person,
               onChange: (value) {
                 _username = value;
@@ -55,10 +53,10 @@ class SignUpPage extends StatelessWidget {
             PurpleButtonWidget(
               text: 'SignUp',
               colour: Colors.purple[700],
-              onPress: () {
-
-                authRequest.signUpRequest(_username, _email.trim(), _password);
-                //await authRequest.LoginRequest(_username, _password);
+              onPress: () async {
+                await authRequest.signUpRequest(
+                    _username, _email.trim(), _password);
+                await authRequest.LoginRequest(_username, _password);
                 //TODO
                 //این برنامه ای پی ایش مشکب داره اگر کار از شزیت
                 //پریفرنس استفاده میکنیم تا کاربر داخل برنامه بمونه
@@ -84,4 +82,3 @@ class SignUpPage extends StatelessWidget {
     );
   }
 }
-

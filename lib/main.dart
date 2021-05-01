@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
+import 'package:flutter_app_provider_toplearn/Screen/CartPage.dart';
 import 'package:flutter_app_provider_toplearn/Screen/LoginPage.dart';
+import 'package:flutter_app_provider_toplearn/Screen/SplashPage.dart';
 import './Provider/ProductProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginPage(),
+        home: CartPage(),
       ),
     );
   }

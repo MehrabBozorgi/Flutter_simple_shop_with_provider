@@ -9,11 +9,16 @@ class AuthProvider extends ChangeNotifier {
   //این ای پی ها اشتباه هستند
   //برای نمونه در صورت تعویض این ای پی ها برنامه کار میکنه
   String _signUpUrl =
-    //  'http://192.168.43.216/toplearn_shop/connect.php/?action=register_user'
-      'http://192.168.43.216/toplearn_shop/connect.php/?action=register_user'
-  ;
+      'http://192.168.43.216/toplearn_shop/connect.php/?action=register_user';
+
   String _LoginUrl =
       'http://192.168.43.216/toplearn_shop/connect.php/?action=register_user';
+
+  var tokenResult = '';
+
+  AuthProvider() {
+    getToken();
+  }
 
   Future signUpRequest(var username, var email, var password) async {
     var response = await http.post(
@@ -38,18 +43,17 @@ class AuthProvider extends ChangeNotifier {
     );
     setToken(jsonDecode(response.body)['auth_token']);
     notifyListeners();
-
   }
 
   Future setToken(var token) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString('token', token);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setString('token', token);
   }
-  Future getToken(var token) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString('token', token);
+
+  Future getToken() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    tokenResult = preferences.getString('token');
+
     notifyListeners();
-
   }
-
 }
