@@ -1,111 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_provider_toplearn/Provider/CartProvider.dart';
+import 'package:flutter_app_provider_toplearn/Widgets/CartListWidget.dart';
 import 'package:flutter_app_provider_toplearn/Widgets/PurpleButtonWidget.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final data = Provider.of<CartProvider>(context, listen: false);
+    data.getToken();
+
     return Scaffold(
       appBar: AppBar(
+        //
+        automaticallyImplyLeading: false,
+        //
         title: Text('Cart'),
         backgroundColor: Colors.black,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CartList(),
-          Container(
-            margin: EdgeInsets.only(top: 270, right: 10, left: 10),
-            child: Row(
+      body: Consumer(
+        builder: (BuildContext context, cart, Widget child) {
+          return SingleChildScrollView(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Count',
-                  style: TextStyle(
-                      fontSize: 20, height: 3, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'TotalCount',
-                  style: TextStyle(
-                      fontSize: 20, height: 3, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            alignment: Alignment.bottomCenter,
-            child: PurpleButtonWidget(
-                colour: Colors.purple, onPress: () {}, text: 'Pay'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CartList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: 1,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            Stack(
-              children: [
+                //کارتی اون طرف تعریف کردیم رو با این پروارد اتصالش دادیم
+                CartListWidget(cart: cart),
                 Container(
-                  height: 170,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.red[100],
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 4,
-                        blurRadius: 8,
-                        offset: Offset(0, 8),
+                  margin: EdgeInsets.only(top: 270, right: 10, left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Count:${cart.totalPrice().round()}',
+                        style: TextStyle(
+                            fontSize: 18,
+                            height: 3,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'TotalCount:${cart.totalTedad().round()}',
+                        style: TextStyle(
+                            fontSize: 18,
+                            height: 3,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
-                Positioned(
-                  top: 5,
-                  left: 8,
-                  child: Text(
-                    'Price',
-                    style: TextStyle(
-                        fontSize: 20, height: 3, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Positioned(
-                  bottom: 20,
-                  left: 8,
-                  child: Text(
-                    'Count',
-                    style: TextStyle(
-                        fontSize: 20, height: 3, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Positioned(
-                  top: 25,
-                  right: 2,
-                  child: Image.asset(
-                    'pic2.png',
-                    fit: BoxFit.cover,
-                    height: 100,
-                  ),
+                Container(
+                  margin: EdgeInsets.only(top: 30),
+                  width: double.infinity,
+                  alignment: Alignment.bottomCenter,
+                  child: PurpleButtonWidget(
+                      colour: Colors.purple, onPress: () {}, text: 'Pay'),
                 ),
               ],
             ),
-          ],
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
