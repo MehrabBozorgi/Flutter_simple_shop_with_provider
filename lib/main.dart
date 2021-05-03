@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
+import 'package:flutter_app_provider_toplearn/Provider/CartProvider.dart';
+import 'package:flutter_app_provider_toplearn/Provider/CounterProvider.dart';
 import 'package:flutter_app_provider_toplearn/Screen/CartPage.dart';
+import 'package:flutter_app_provider_toplearn/Screen/HomePage.dart';
 import 'package:flutter_app_provider_toplearn/Screen/LoginPage.dart';
 import 'package:flutter_app_provider_toplearn/Screen/SplashPage.dart';
 import './Provider/ProductProvider.dart';
@@ -21,10 +24,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+        ),ChangeNotifierProvider(
+          create: (context) => CounterProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: CartPage(),
+        home: SplashPage(),
       ),
     );
   }
