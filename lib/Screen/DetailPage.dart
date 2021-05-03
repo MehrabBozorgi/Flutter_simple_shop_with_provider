@@ -6,6 +6,7 @@ import '../Widgets/RoundedButtonWidget.dart';
 
 class DetailPage extends StatelessWidget {
   final Product product;
+
 //http://192.168.1.51/toplearn_shop/connect.php/?action=register_user
   const DetailPage({this.product});
 
@@ -61,7 +62,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             RoundedButtonWidget(),
-            CartButtonWidget(),
+            CartButtonWidget(product: product,),
           ],
         ),
       ),

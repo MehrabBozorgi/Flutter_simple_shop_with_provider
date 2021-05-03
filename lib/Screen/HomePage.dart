@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_provider_toplearn/Screen/CartPage.dart';
 import 'package:flutter_app_provider_toplearn/Screen/DetailPage.dart';
 import '../Items/HomeItem.dart';
 import '../Provider/ProductProvider.dart';
@@ -32,7 +33,14 @@ class HomePage extends StatelessWidget {
                     Icons.shopping_cart_sharp,
                     color: Colors.grey[600],
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(),
+                      ),
+                    );
+                  }),
             ],
           ),
           body: GridView.builder(
@@ -51,8 +59,10 @@ class HomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                      // وقتی فقط ایندکس خالی رو میذاریم یعنی کل مدل بره اونور
-                          DetailPage(product: product.items[index],),
+                          // وقتی فقط ایندکس خالی رو میذاریم یعنی کل مدل بره اونور
+                          DetailPage(
+                        product: product.items[index],
+                      ),
                     ),
                   );
                 },
