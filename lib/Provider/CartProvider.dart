@@ -4,13 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_provider_toplearn/Model/Cart.dart';
 import 'package:flutter_app_provider_toplearn/Model/Product.dart';
+import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider extends ChangeNotifier {
   String orderListUrl = '';
+  String cartUrl = '';
   List<Cart> _cartItems = [];
   List productItem = [];
 
@@ -75,5 +78,20 @@ class CartProvider extends ChangeNotifier {
           (productItem[i]['tedad'] * productItem[i]['product']['price']);
     }
     return totalPrice;
+  }
+
+  Future addToCart(String product, int tedad, BuildContext context) async {
+
+    var token =
+        await Provider.of<AuthProvider>(context, listen: false).tokenResult;
+
+    var response = http.post(cartUrl,
+        body: jsonEncode({
+          'product': product,
+          'tedad': tedad,
+        }),
+        headers: {
+          HttpHeaders.authorizationHeader: 'token,$token',
+        });
   }
 }
