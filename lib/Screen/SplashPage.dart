@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_provider_toplearn/Provider/AuthProvider.dart';
 import 'package:flutter_app_provider_toplearn/Screen/HomePage.dart';
+import 'package:flutter_app_provider_toplearn/Screen/WelcomePage.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -30,7 +31,11 @@ class _SplashPageState extends State<SplashPage>
         Future.delayed(Duration(seconds: 1), () {
           logged(HomePage());
         });
-      } else {}
+      } else {
+        Future.delayed(Duration(seconds: 1), () {
+          logged(WelcomePage());
+        });
+      }
     });
   }
 
@@ -55,14 +60,18 @@ class _SplashPageState extends State<SplashPage>
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'one',
+                        text: 'one ',
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 25,
                         ),
                       ),
                       TextSpan(
-                        text: 'two',
+                        text: ' two',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 25,
+                        ),
                       ),
                     ],
                   ),
@@ -73,5 +82,12 @@ class _SplashPageState extends State<SplashPage>
         ),
       ),
     );
+  }
+
+//این متد صفحه اسپلش رو بعد از اینکه انیمیشنش تموم شدش کلا متوقف میکنه و میبنده
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 }

@@ -4,6 +4,7 @@ import '../Widgets/SocialPicWidget.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/InputFieldWidget.dart';
 import '../Widgets/PurpleButtonWidget.dart';
+import 'HomePage.dart';
 
 class SignUpPage extends StatelessWidget {
   String _email;
@@ -20,7 +21,24 @@ class SignUpPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 100, right: 20, left: 20),
+              padding: EdgeInsets.only(top: 20),
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  icon: Icon(
+                    Icons.skip_next,
+                    color: Colors.purple,size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
+                  }),
+            ),
+            Container(
+              padding: EdgeInsets.all( 20),
               child: Image.asset('signup.png'),
             ),
             InputFieldWidget(

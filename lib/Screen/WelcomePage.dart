@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_provider_toplearn/Screen/LoginPage.dart';
 import 'package:flutter_app_provider_toplearn/Widgets/PurpleButtonWidget.dart';
 
+import 'SignUpPage.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -22,11 +24,26 @@ class _WelcomePageState extends State<WelcomePage> {
             PurpleButtonWidget(
               text: 'Login',
               colour: Colors.purple[700],
-              onPress: () {},
-            ),PurpleButtonWidget(
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ),
+                );
+              },
+            ),
+            PurpleButtonWidget(
               text: 'SingUp',
               colour: Colors.purple[700],
-              onPress: () {},
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignUpPage(),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -34,5 +51,3 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 }
-
-
